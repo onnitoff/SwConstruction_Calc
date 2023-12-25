@@ -1,0 +1,29 @@
+﻿<Window x:Class="Calc.Controller.CalcController"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calc.Controller"
+        mc:Ignorable="d"
+        Title="CalcView" Height="350" Width="300">
+    <Grid>
+        <TextBox Name="txtResult" Background="Gray" HorizontalAlignment="Center" Margin="0,3,0,279" Width="240" IsReadOnly="True"/>
+        <Button Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,117,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        <Button Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,174,0,0" Width="50" Height="50" Click="Digit_Click" RenderTransformOrigin="1.258,1.851"/>
+        <Button Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,229,0,0" Width="50" Height="50" Click="Digit_Click"/>
+
+        <Button Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,229,0,0" Width="50" Height="50" Click="Result_Click"/>
+        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,60,0,0" Width="50" Height="50" Click="Operation_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,117,0,0" Width="50" Height="50" Click="Operation_Click"/>
+        <Button Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,174,0,0" Width="50" Height="50" Click="Operation_Click"/>
+        <Button Content="/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,229,0,0" Width="50" Height="50" Click="Operation_Click" RenderTransformOrigin="0.12,0.985"/>
+        <Button Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,229,0,0" Width="50" Height="50" Click="Clear_Click"/>
+    </Grid>
+</Window>
