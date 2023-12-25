@@ -24,13 +24,7 @@ namespace Calc.View
         public CalcView()
         {
 
-            //InitializeComponent();
-
-            CalcModel model = new CalcModel();
-            CalcView view = new CalcView();
-           // CalcController controller = new CalcController(model, view);
-
-           // controller.Show();
+           
         }
     }
 }
