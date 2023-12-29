@@ -21,10 +21,13 @@ namespace Calc.Controller
         private double currentResult;
         private string currentOperation;
 
+        private string content;
+        InOutput inOutput = new InOutput();
+
         public CalcController()
         {
             InitializeComponent();
-            //model = new CalcModel();
+            model = new CalcModel();
             modelDecorator = new PowDecorator(model);
             
             currentInput = string.Empty;
@@ -38,6 +41,7 @@ namespace Calc.Controller
             {
                 currentInput += button.Content.ToString();
                 UpdateDisplay(currentInput);
+                content += currentInput;
             }
         }
 
@@ -56,6 +60,7 @@ namespace Calc.Controller
                     currentOperation = button.Content.ToString();
                     currentResult = double.Parse(currentInput);
                     UpdateDisplay(currentInput);
+                    content += currentOperation;
                     currentInput = string.Empty;
                 }
 
@@ -98,6 +103,7 @@ namespace Calc.Controller
             {
                 double operand2 = double.Parse(currentInput);
                 currentResult = model.PerformOperation(currentResult, operand2, currentOperation);
+                content += "=" + currentResult.ToString() + "\n";
                 currentInput = string.Empty;
                 currentOperation = string.Empty;
             }
@@ -143,6 +149,37 @@ namespace Calc.Controller
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
             }
+        }
+
+        private void Write_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Write(content);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private void Read_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(inOutput.Read());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            
+        }
+
+        private void Write (string content)
+        {
+            MessageBox.Show(inOutput.Write(content));
+
         }
     }
 }

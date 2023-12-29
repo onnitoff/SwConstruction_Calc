@@ -26,5 +26,7 @@
         <Button Content="/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,229,0,0" Width="50" Height="50" Click="Operation_Click" RenderTransformOrigin="0.12,0.985"/>
         <Button Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,229,0,0" Width="50" Height="50" Click="Clear_Click"/>
         <Button Content="POW" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,284,0,0" Width="50" Height="50" Click="Pow_Click" RenderTransformOrigin="0.12,0.985"/>
+        <Button Content="Write" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,285,0,0" Width="50" Height="50" Click="Write_Click"/>
+        <Button Content="Read" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,285,0,0" Width="50" Height="50" Click="Read_Click"/>
     </Grid>
 </Window>
