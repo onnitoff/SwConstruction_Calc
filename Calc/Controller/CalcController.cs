@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
-using Calc.Model;
+//using Calc.Model;
+using MathClass_Calc;
 using Calc.View;
+
 
 namespace Calc.Controller
 {
     public partial class CalcController : Window
     {
-        private CalcModel model;
+        private Math_Calc model;
+        //private CalcModel model;
         private string currentInput;
         private double currentResult;
         private string currentOperation;
@@ -20,7 +23,8 @@ namespace Calc.Controller
         public CalcController()
         {
             InitializeComponent();
-            model = new CalcModel();
+            //model = new CalcModel();
+            model = new Math_Calc();
             currentInput = string.Empty;
             currentResult = 0;
             currentOperation = string.Empty;

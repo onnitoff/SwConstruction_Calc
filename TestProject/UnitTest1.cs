@@ -42,6 +42,7 @@ namespace TestProject
             //act
             
             double actual = model.PerformOperation(x, y, str);
+
             //assert
             Console.WriteLine("Some test");
             Assert.AreEqual(expected, actual);

@@ -103,5 +103,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MathClass_Calc\MathClass_Calc\MathClass_Calc.csproj">
+      <Project>{8aaceb6a-2d91-4633-addb-184b72a71863}</Project>
+      <Name>MathClass_Calc</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
