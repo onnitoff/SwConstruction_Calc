@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calc.Model
 {
-    public class CalcModel
+    public class CalcModel : ICalc
     {
         public double PerformOperation(double operand1, double operand2, string operation)
         {

@@ -8,13 +8,14 @@ using System.Windows;
 //using Calc.Model;
 using MathClass_Calc;
 using Calc.View;
-
+using Calc.Model;
 
 namespace Calc.Controller
 {
     public partial class CalcController : Window
     {
-        private Math_Calc model;
+        ICalc model = new CalcModel();
+        private ICalc modelDecorator;
         //private CalcModel model;
         private string currentInput;
         private double currentResult;
@@ -24,7 +25,8 @@ namespace Calc.Controller
         {
             InitializeComponent();
             //model = new CalcModel();
-            model = new Math_Calc();
+            modelDecorator = new PowDecorator(model);
+            
             currentInput = string.Empty;
             currentResult = 0;
             currentOperation = string.Empty;
@@ -109,6 +111,38 @@ namespace Calc.Controller
         private void UpdateDisplay(string value)
         {
             txtResult.Text = value;
+        }
+
+
+        private void Pow_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PowResult();
+                currentInput = currentResult.ToString();
+                UpdateDisplay(currentInput);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                Clear();
+            }
+        }
+
+        private void PowResult()
+        {
+            try
+            {
+                double operand2 = double.Parse(currentInput);
+                currentResult = modelDecorator.PerformOperation(currentResult, operand2, currentOperation);
+                currentInput = string.Empty;
+                currentOperation = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                Clear();
+            }
         }
     }
 }
