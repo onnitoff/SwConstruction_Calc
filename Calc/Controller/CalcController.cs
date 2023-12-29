@@ -8,26 +8,35 @@ using System.Windows;
 //using Calc.Model;
 using MathClass_Calc;
 using Calc.View;
-
+using Calc.Model;
+using log4net;
+using log4net.Config;
 
 namespace Calc.Controller
 {
     public partial class CalcController : Window
     {
-        private Math_Calc model;
+        private static readonly ILog log = LogManager.GetLogger(typeof(CalcController));
+        ICalc model = new CalcModel();
+        private ICalc modelDecorator;
         //private CalcModel model;
         private string currentInput;
         private double currentResult;
         private string currentOperation;
 
+        private string content;
+        InOutput inOutput = new InOutput();
+
         public CalcController()
         {
             InitializeComponent();
-            //model = new CalcModel();
-            model = new Math_Calc();
+            model = new CalcModel();
+            modelDecorator = new PowDecorator(model);
+            
             currentInput = string.Empty;
             currentResult = 0;
             currentOperation = string.Empty;
+            //log4net.Config.XmlConfigurator.Configure();
         }
 
         private void Digit_Click(object sender, RoutedEventArgs e)
@@ -36,7 +45,10 @@ namespace Calc.Controller
             {
                 currentInput += button.Content.ToString();
                 UpdateDisplay(currentInput);
+                content += currentInput;
+                log.Info($"Это информационное сообщение: {currentInput}");
             }
+            log.Warn("Пустой вызов Digit_Click");
         }
 
         private void Operation_Click(object sender, RoutedEventArgs e)
@@ -51,14 +63,25 @@ namespace Calc.Controller
                 }
                 else
                 {
-                    currentOperation = button.Content.ToString();
-                    currentResult = double.Parse(currentInput);
-                    UpdateDisplay(currentInput);
-                    currentInput = string.Empty;
-                }
-
-                
+                    try
+                    {
+                        currentOperation = button.Content.ToString();
+                        currentResult = double.Parse(currentInput);
+                        UpdateDisplay(currentInput);
+                        content += currentOperation;
+                        currentInput = string.Empty;
+                        log.Info($"Это информационное сообщение: {currentOperation}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                        Clear();
+                        log.Error($"Это сообщение об ошибке {ex.Message}");
+                    }
+                    
+                } 
             }
+            log.Warn("Пустой вызов Operation_Click");
         }
 
         private void Result_Click(object sender, RoutedEventArgs e)
@@ -74,6 +97,7 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
@@ -96,6 +120,47 @@ namespace Calc.Controller
             {
                 double operand2 = double.Parse(currentInput);
                 currentResult = model.PerformOperation(currentResult, operand2, currentOperation);
+                content += "=" + currentResult.ToString() + "\n";
+                currentInput = string.Empty;
+                currentOperation = string.Empty;
+                log.Info($"Это информационное сообщение: {currentResult}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
+            }
+        }
+
+        private void UpdateDisplay(string value)
+        {
+            txtResult.Text = value;
+        }
+
+
+        private void Pow_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PowResult();
+                currentInput = currentResult.ToString();
+                UpdateDisplay(currentInput);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
+            }
+        }
+
+        private void PowResult()
+        {
+            try
+            {
+                double operand2 = double.Parse(currentInput);
+                currentResult = modelDecorator.PerformOperation(currentResult, operand2, currentOperation);
                 currentInput = string.Empty;
                 currentOperation = string.Empty;
             }
@@ -103,12 +168,42 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
-        private void UpdateDisplay(string value)
+        private void Write_Click(object sender, RoutedEventArgs e)
         {
-            txtResult.Text = value;
+            try
+            {
+                Write(content);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                log.Error($"Это сообщение об ошибке {ex.Message}");
+            }
+            
+        }
+
+        private void Read_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(inOutput.Read());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+
+            
+        }
+
+        private void Write (string content)
+        {
+            MessageBox.Show(inOutput.Write(content));
+
         }
     }
 }
