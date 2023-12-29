@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\PowDecorator.cs" />
+    <Compile Include="Model\ICalc.cs" />
     <Compile Include="View\CalcView.xaml.cs">
       <DependentUpon>CalcView.xaml</DependentUpon>
     </Compile>
