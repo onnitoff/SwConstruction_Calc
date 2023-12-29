@@ -9,11 +9,14 @@ using System.Windows;
 using MathClass_Calc;
 using Calc.View;
 using Calc.Model;
+using log4net;
+using log4net.Config;
 
 namespace Calc.Controller
 {
     public partial class CalcController : Window
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(CalcController));
         ICalc model = new CalcModel();
         private ICalc modelDecorator;
         //private CalcModel model;
@@ -33,6 +36,7 @@ namespace Calc.Controller
             currentInput = string.Empty;
             currentResult = 0;
             currentOperation = string.Empty;
+            //log4net.Config.XmlConfigurator.Configure();
         }
 
         private void Digit_Click(object sender, RoutedEventArgs e)
@@ -42,7 +46,9 @@ namespace Calc.Controller
                 currentInput += button.Content.ToString();
                 UpdateDisplay(currentInput);
                 content += currentInput;
+                log.Info($"Это информационное сообщение: {currentInput}");
             }
+            log.Warn("Пустой вызов Digit_Click");
         }
 
         private void Operation_Click(object sender, RoutedEventArgs e)
@@ -57,15 +63,25 @@ namespace Calc.Controller
                 }
                 else
                 {
-                    currentOperation = button.Content.ToString();
-                    currentResult = double.Parse(currentInput);
-                    UpdateDisplay(currentInput);
-                    content += currentOperation;
-                    currentInput = string.Empty;
-                }
-
-                
+                    try
+                    {
+                        currentOperation = button.Content.ToString();
+                        currentResult = double.Parse(currentInput);
+                        UpdateDisplay(currentInput);
+                        content += currentOperation;
+                        currentInput = string.Empty;
+                        log.Info($"Это информационное сообщение: {currentOperation}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                        Clear();
+                        log.Error($"Это сообщение об ошибке {ex.Message}");
+                    }
+                    
+                } 
             }
+            log.Warn("Пустой вызов Operation_Click");
         }
 
         private void Result_Click(object sender, RoutedEventArgs e)
@@ -81,6 +97,7 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
@@ -106,11 +123,13 @@ namespace Calc.Controller
                 content += "=" + currentResult.ToString() + "\n";
                 currentInput = string.Empty;
                 currentOperation = string.Empty;
+                log.Info($"Это информационное сообщение: {currentResult}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
@@ -132,6 +151,7 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
@@ -148,6 +168,7 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
                 Clear();
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
         }
 
@@ -160,7 +181,9 @@ namespace Calc.Controller
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
+                log.Error($"Это сообщение об ошибке {ex.Message}");
             }
+            
         }
 
         private void Read_Click(object sender, RoutedEventArgs e)
@@ -173,6 +196,7 @@ namespace Calc.Controller
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
+
             
         }
 
