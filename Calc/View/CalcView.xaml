@@ -3,30 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Calc.Controller"
+        xmlns:local="clr-namespace:Calc"
         mc:Ignorable="d"
-        Title="CalcView" Height="372" Width="300">
-    <Grid>
-        <TextBox Name="txtResult" Background="Gray" HorizontalAlignment="Center" Margin="0,3,0,279" Width="240" IsReadOnly="True"/>
-        <Button Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,117,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
-        <Button Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,174,0,0" Width="50" Height="50" Click="Digit_Click" RenderTransformOrigin="1.258,1.851"/>
-        <Button Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,229,0,0" Width="50" Height="50" Click="Digit_Click"/>
+        Title="{DynamicResource m_Title}" Height="400" Width="300">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="{x:Null}">
+            <MenuItem x:Name="menuLanguage" Header="{DynamicResource m_menu_Language}" />
+        </Menu>
 
-        <Button Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,229,0,0" Width="50" Height="50" Click="Result_Click"/>
-        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,60,0,0" Width="50" Height="50" Click="Operation_Click"/>
-        <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,117,0,0" Width="50" Height="50" Click="Operation_Click"/>
-        <Button Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,174,0,0" Width="50" Height="50" Click="Operation_Click"/>
-        <Button Content="/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,229,0,0" Width="50" Height="50" Click="Operation_Click" RenderTransformOrigin="0.12,0.985"/>
-        <Button Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,229,0,0" Width="50" Height="50" Click="Clear_Click"/>
-        <Button Content="POW" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,284,0,0" Width="50" Height="50" Click="Pow_Click" RenderTransformOrigin="0.12,0.985"/>
-        <Button Content="Write" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,285,0,0" Width="50" Height="50" Click="Write_Click"/>
-        <Button Content="Read" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,285,0,0" Width="50" Height="50" Click="Read_Click"/>
-    </Grid>
+        <Grid Margin="0,0,0,1">
+            <TextBox Name="txtResult" Background="Gray" HorizontalAlignment="Center" Margin="0,3,0,308" Width="240" IsReadOnly="True"/>
+            <Button Content="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,60,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,116,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="6" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,117,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,174,0,0" Width="50" Height="50" Click="Digit_Click"/>
+            <Button Content="9" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,174,0,0" Width="50" Height="50" Click="Digit_Click" RenderTransformOrigin="1.258,1.851"/>
+            <Button Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,229,0,0" Width="50" Height="50" Click="Digit_Click"/>
+
+            <Button Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,229,0,0" Width="50" Height="50" Click="Result_Click"/>
+            <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,60,0,0" Width="50" Height="50" Click="Operation_Click"/>
+            <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,117,0,0" Width="50" Height="50" Click="Operation_Click"/>
+            <Button Content="*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,174,0,0" Width="50" Height="50" Click="Operation_Click"/>
+            <Button Content="/" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="217,229,0,0" Width="50" Height="50" Click="Operation_Click" RenderTransformOrigin="0.12,0.985"/>
+            <Button Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,229,0,0" Width="50" Height="50" Click="Clear_Click"/>
+            <Button Content="POW" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,284,0,0" Width="50" Height="50" Click="Pow_Click" RenderTransformOrigin="0.12,0.985"/>
+            <Button Content="{DynamicResource m_BtnWrite}" x:Uid="Write" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,285,0,0" Width="50" Height="50" Click="Write_Click"/>
+            <Button Content="{DynamicResource m_BtnRead}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,285,0,0" Width="50" Height="50" Click="Read_Click"/>
+
+
+        </Grid>
+    </DockPanel>
+    
 </Window>
