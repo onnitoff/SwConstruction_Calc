@@ -28,7 +28,41 @@ namespace TestProject
             Console.WriteLine("Last exec");
         }
 
-        
+        [Test]
+        public void Send_10and10andPlud_20returned()
+        {
+            //arrange
+            double x = 10;
+            double y = 10;
+            string str = "+";
+            double expected = 20;
+
+            //act
+
+            double actual = model.PerformOperation(x, y, str);
+
+            //assert
+            Console.WriteLine("Some test");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Send_10and10andMinus_0returned()
+        {
+            //arrange
+            double x = 10;
+            double y = 10;
+            string str = "-";
+            double expected = 0;
+
+            //act
+
+            double actual = model.PerformOperation(x, y, str);
+
+            //assert
+            Console.WriteLine("Some test");
+            Assert.AreEqual(expected, actual);
+        }
 
         [Test]
         public void Send_10and10andMultiply_100returned()
@@ -47,5 +81,24 @@ namespace TestProject
             Console.WriteLine("Some test");
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Send_10and1andDevide_10returned()
+        {
+            //arrange
+            double x = 10;
+            double y = 1;
+            string str = "/";
+            double expected = 10;
+
+            //act
+
+            double actual = model.PerformOperation(x, y, str);
+
+            //assert
+            Console.WriteLine("Some test");
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
